@@ -59,7 +59,7 @@ for driver in drivers:
         telemetry = telemetry.append(driver_telemetry)
 
 # Only keep required columns
-telemetry = telemetry[['Lap', 'Distance', 'Compound', 'Speed', 'X','Y']]
+telemetry = telemetry[['Lap', 'Distance', 'Compound', 'Speed', 'X', 'Y']]
 
 # Everything that's not intermediate will be "slick"
 telemetry['Compound'].loc[telemetry['Compound'] != 'INTERMEDIATE'] = 'SLICK'
@@ -79,7 +79,7 @@ for i in range(0, (num_minisectors - 1)):
     minisectors.append(minisector_length * (i + 1))
 
 # Assign minisector to every row in the telemetry data
-telemetry['Minisector'] =  telemetry['Distance'].apply(
+telemetry['Minisector'] = telemetry['Distance'].apply(
   lambda z: (
     minisectors.index(
       min(minisectors, key=lambda x: abs(x-z)))+1
@@ -140,7 +140,7 @@ def generate_minisector_plot(lap, save=False, details=True):
     if save:
         plt.savefig(f"img/minisectors_lap_{lap}.png", dpi=300)
 
-    plt.show()
+    # plt.show()  # uncomment to show plots immediately after rendering
 
 for i in range(46, 53):
     generate_minisector_plot(i, save=True, details=False)
